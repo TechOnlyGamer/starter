@@ -79,6 +79,7 @@ return {
       build = "make",
       config = function()
         require("telescope").load_extension("fzf")
+        require("telescope").load_extension("flutter")
       end,
     },
   },
@@ -210,12 +211,14 @@ return {
       },
     },
   },
-
   -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip
   {
     "L3MON4D3/LuaSnip",
-    keys = function()
+    dependencies = { "rafamadriz/friendly-snippets", "saadparwaiz1/cmp_luasnip" },
+    opts = function()
+      require("luasnip/loaders/from_vscode").lazy_load("~/.config/nvim/lua/snippets")
+      require("luasnip").filetype_extend("all", { "_" })
       return {}
     end,
   },
@@ -235,13 +238,25 @@ return {
 
       local luasnip = require("luasnip")
       local cmp = require("cmp")
-
+      ---Setup LuaSnip completion
+      --      cmp.setup{
+      --      snippet = {
+      --        expand = function(args)
+      --          require'luasnip'.lsp_expand(args.body)
+      --        end
+      --      },
+      --      sources = {
+      --        { name = 'luasnip' },
+      --        -- more sources
+      --        },
+      --      }
+      --      end,
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- this way you will only jump inside the snippet region
+            -- they way you will only jump inside the snippet region
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
