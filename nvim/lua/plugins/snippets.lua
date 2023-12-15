@@ -3,16 +3,18 @@ return {
     "L3MON4D3/LuaSnip",
     dependencies = {
       "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
+      "benfowler/telescope-luasnip.nvim",
     },
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load({ path = { "~/.config/nvim/lua/snippets/" } })
+      require("telescope").load_extension("luasnip")
+    end,
     opts = {
       history = true,
       delete_check_events = "TextChanged",
     },
   -- stylua: ignore
-  keys = {
+    keys = {
     {
       "<tab>",
       function()
@@ -28,7 +30,7 @@ return {
     "rafamadriz/friendly-snippets",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip.loaders.from_vscode").filetype_extend("all", { "_" })
+      require("luasnip").filetype_extend("dart", { "flutter" })
     end,
   },
   {

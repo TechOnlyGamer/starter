@@ -1,19 +1,20 @@
 return {
   {
     "akinsho/flutter-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim", "stevearc/dressing.nvim" },
     keys = {
       -- FLUTTER-TOOLS
       -- ######################################
-      { "<leader>fd", "<cmd> FlutterDevices <CR>", desc = "Flutter devices" },
-      { "<leader>fe", "<cmd> FlutterEmulator <CR>", desc = "Flutter emultor" },
-      { "<leader>fD", "<cmd> FlutterDetatch <CR>", desc = "Flutter detatch" },
-      { "<leader>ff", "<cmd> FlutterRun <CR>", desc = "Flutter run" },
-      { "<leader>fq", "<cmd> FlutterQuit <CR>", desc = "Flutter quit" },
-      { "<leader>fr", "<cmd> FlutterReload <CR>", desc = "Flutter reload" },
-      { "<leader>fR", "<cmd> FlutterRestart <CR>", desc = "Flutter restart" },
-      { "<leader>fpu", "<cmd> FlutterPubUpgrade <CR>", desc = "Flutter pub upgrade" },
-      { "<leader>fpg", "<cmd> FlutterPubGet <CR>", desc = "Flutter pub get" },
+      { "<leader>Fd", "<cmd> FlutterDevices <CR>", desc = "Flutter devices" },
+      { "<leader>Fe", "<cmd> FlutterEmulator <CR>", desc = "Flutter emultor" },
+      { "<leader>FD", "<cmd> FlutterDetatch <CR>", desc = "Flutter detatch" },
+      { "<leader>Ff", "<cmd> FlutterRun <CR>", desc = "Flutter run" },
+      { "<leader>Fq", "<cmd> FlutterQuit <CR>", desc = "Flutter quit" },
+      { "<leader>Fr", "<cmd> FlutterReload <CR>", desc = "Flutter reload" },
+      { "<leader>FR", "<cmd> FlutterRestart <CR>", desc = "Flutter restart" },
+      { "<leader>Fpu", "<cmd> FlutterPubUpgrade <CR>", desc = "Flutter pub upgrade" },
+      { "<leader>Fpg", "<cmd> FlutterPubGet <CR>", desc = "Flutter pub get" },
     },
     ft = "dart",
     config = function()
@@ -47,8 +48,18 @@ return {
           settings = {
             showTodos = true,
             completeFunctionCalls = true,
-            enableSnippets = false,
+            renameFilesWithClasses = "prompt", -- "always"
+            enableSnippets = true,
           },
+        },
+        dev_tools = {
+          autostart = false, -- autostart devtools server if not detected
+          auto_open_browser = false, -- Automatically opens devtools in the browser
+        },
+        closing_tags = {
+          highlight = "ErrorMsg", -- highlight for the closing tag
+          prefix = ">", -- character to use for close tag e.g. > Widget
+          enabled = true, -- set to false to disable
         },
         debugger = {
           enabled = false,
